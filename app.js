@@ -23,8 +23,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoUrl =
-  "mongodb+srv://test:test1234@testbymin.gc9kyey.mongodb.net/?retryWrites=true&w=majority";
+mongoUrl = "ใส่ Url mongo DB ตรงนี้";
 app.use(async (req, res, next) => {
   try {
     await mongoose.connect(mongoUrl);
