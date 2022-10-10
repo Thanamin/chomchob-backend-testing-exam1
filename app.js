@@ -60,7 +60,6 @@ app.get("/", ifNotLoggedIn ,(req, res, next) => {
       }
 });
 
-// app.use(router)
 /// user ใส่ login ไปเช็คกับ sever
 app.post("/login",async (req, res) => {
   const userResult = await UserModel.findOne(
