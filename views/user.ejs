@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UserDashboard</title>
+</head>
+
+<body>
+    <a>สวัสดีคุณ................</a><br>
+
+
+    <a>ราคาเหรียญปัจุบัน</a>
+    <table>
+        <tr>
+            <th>Token</th>
+            <th>USD ($)</th>
+        </tr>
+        <table>
+            <td>BTC</td>
+            <td>120000</td>
+        <tr>
+
+        <tr>
+            <td>ETH</td>
+            <td>10000</td>
+        </tr>
+        <tr>
+            <td>XRP</td>
+            <td>5</td>
+        </tr>
+    </table>
+    
+    
+
+
+
+
+    <table>
+        <tr>
+            <th>Token</th>
+            <th>amount</th>
+            <th>value ($)</th>
+        </tr>
+        <table>
+            <td>BTC</td>
+            <td>3</td>
+        <tr>
+
+        <tr>
+            <td>ETH</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>XRP</td>
+            <td>1000</td>
+        </tr>
+    </table>
+    
+
+    <form type="submit" class="fromSendCoin"><div>
+        <h3>โอนเงิน</h3>
+    </div>
+        <div>
+        <a>สกุลเงินที่ต้องการส่งออก</a>
+        <select title="coin" value="selectedType" onChange="e => setType(e.target.value)">
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="XRP">XRP</option>
+        </select>
+        </div>
+
+        <div>
+        <a>สกุลเงินที่ต้องการให้ผู้รับได้รับ</a>
+        <select title="coin" value="selectedType" onChange="e => setType(e.target.value)">
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="XRP">XRP</option>
+        </select>
+        </div>
+
+        <div>
+            <a>อัตราแลกเปลี่ยน</a>
+            <a>1:15</a>
+        </div>
+
+
+        <div>   
+        <a>user (ผู้รับเงิน) </a>
+        <input title="amount" type="text">
+        </div>
+
+        <div>
+        <a>จำนวนเงิน</a>
+        <input title="amount" type="number">
+        <button name="sendCoin" type="submit" >Send</button>
+        </div>
+
+    </form>
+</body>
+
+</html>

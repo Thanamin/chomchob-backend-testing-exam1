@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+</head>
+
+<body>
+    <h1>กรุณา Login</h1>
+    <div class='main-login'>
+        <div class='bg-form'>
+            <div class='login-form'>
+
+
+                <form method="POST" action="/login">
+                    <div class="container">
+                        <div id='input-signup'>
+                            <input type="text" placeholder="Enter Username" id="usr" name="user_name" required />
+                            <input type="password" placeholder="Enter Password" id="psw" name="password" required />
+                        </div>
+                    </div>
+                    <a href='/'><button class='login' type="submit">Log In</button></a>
+                </form>
+
+
+                <!-- <div id='button-signup'>
+                    <a href='/signup'><button class='signup' type="submit">Signup</button></a>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    // console.log(token)
+        // import Swal from "sweetalert2";
+        
+        // function handleSubmit(e) {
+        // e.preventDefault();
+        // // console.log('WORK')
+
+        // const data = {
+        //     user_name: userName,
+        //     password: password
+        // }
+
+        // const checkLogin = async (user_name = data.user_name) => {
+        //     const response = await instance.get('/users/signup/check', { params: { user_name: user_name } });
+        //     if (!response.data) {
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: 'Oops...',
+        //             text: 'Invalid username ',
+        //         })
+        //     } else if (data.password !== response.data.password) {
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: 'Oops...',
+        //             text: 'Invalid  password',
+        //         })
+        //     } else {
+        //         instance.post('/login', data)
+        //             .then(res => {
+        //                 // console.log(res)
+        //                 usedToken.setToken(res.data)
+        //                 navigate('/')
+        //             })
+        //             .catch(err => {
+        //                 console.log(err)
+        //             })
+        //     }
+        // }
+        // checkLogin()
+    // }
+    </script>
+
+</html>
