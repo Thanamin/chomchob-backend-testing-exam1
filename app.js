@@ -48,9 +48,9 @@ const ifNotLoggedIn = (req, res, next) => {
 app.get("/", ifNotLoggedIn, (req, res, next) => {
   // UserModel.findOne({ user_name: req.body.user_name})
   if (token.role === "admin") {
-    return res.render("admin");
+    return res.render("admin",{token:token});
   } else if (token.role === "user") {
-    return res.render("user");
+    return res.render("user",{token:token});
   }
 });
 /////////////////////////////////////////////
