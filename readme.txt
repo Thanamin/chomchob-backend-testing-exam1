@@ -1,7 +1,7 @@
 TEST ระบบ
 
 //Admin
-    username = Admin
+    username = admin
     password = 1234
 
 
