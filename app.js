@@ -418,7 +418,7 @@ app.post("/usersend", async (req, res) => {
 //Logout Website
 app.post('/logout',(req,res,next)=>{
   token = null
-  console.log(token)
+  // console.log(token)
   res.redirect('/')
 })
 /////////////////////////////////////////////
