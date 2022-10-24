@@ -310,6 +310,103 @@ app.post("/transfer", async (req, res) => {
 /////////////////////////////////////////////
 // โอนเงิน userA to userB
 app.post("/usersend", async (req, res) => {
+  console.log(token)
+
+  let findWalletCoinOut = await WalletsModel.findOne({
+    user_name: token.user_name,
+  });
+
+  console.log(findWalletCoinOut)
+
+  let findWalletCoinIn = await WalletsModel.findOne({
+    user_name: req.body.userIn,
+  });
+
+  let coinCheckUserCoinOut = req.body.selectCoinOut;
+  let sendAmountCoinUserCoinOut = req.body.amount;
+
+  if (coinCheckUserCoinOut === "BTC") {
+    if (sendAmountCoinUserCoinOut < findWalletCoinOut.BTC) {
+      let sumUserCoinOut = findWalletCoinOut.BTC - +sendAmountCoinUserCoinOut;
+      let sumUserCoinIn = findWalletCoinIn.BTC + +sendAmountCoinUserCoinOut;
+
+      findWalletCoinOut.BTC = sumUserCoinOut;
+      findWalletCoinOut._id = findWalletCoinOut._id;
+      try {
+        console.log(findWalletCoinOut);
+        await findWalletCoinOut.save();
+
+        findWalletCoinIn.BTC = sumUserCoinIn;
+        findWalletCoinIn._id = findWalletCoinIn._id;
+        try {
+          await findWalletCoinIn.save();
+          res.send("send success");
+        } catch (error) {
+          res.status(400).send(error);
+          console.log("wallet CoinIn can't receive");
+        }
+      } catch (error) {
+        res.status(400).send(error);
+        console.log("wallet CoinOut can't send");
+      }
+    } else {
+      res.send("not enough token");
+    }
+  } else if (coinCheckUserCoinOut === "ETH") {
+    if (sendAmountCoinUserCoinOut < findWalletCoinOut.ETH) {
+      let sumUserCoinOut = findWalletCoinOut.ETH - +sendAmountCoinUserCoinOut;
+      let sumUserCoinIn = findWalletCoinIn.ETH + +sendAmountCoinUserCoinOut;
+
+      findWalletCoinOut.ETH = sumUserCoinOut;
+      findWalletCoinOut._id = findWalletCoinOut._id;
+      try {
+        console.log(findWalletCoinOut);
+        await findWalletCoinOut.save();
+
+        findWalletCoinIn.ETH = sumUserCoinIn;
+        findWalletCoinIn._id = findWalletCoinIn._id;
+        try {
+          await findWalletCoinIn.save();
+          res.send("send success");
+        } catch (error) {
+          res.status(400).send(error);
+          console.log("wallet CoinIn can't receive");
+        }
+      } catch (error) {
+        res.status(400).send(error);
+        console.log("wallet CoinOut can't send");
+      }
+    } else {
+      res.send("not enough token");
+    }
+  } else if (coinCheckUserCoinOut === "XRP") {
+    if (sendAmountCoinUserCoinOut < findWalletCoinOut.XRP) {
+      let sumUserCoinOut = findWalletCoinOut.XRP - +sendAmountCoinUserCoinOut;
+      let sumUserCoinIn = findWalletCoinIn.XRP + +sendAmountCoinUserCoinOut;
+
+      findWalletCoinOut.XRP = sumUserCoinOut;
+      findWalletCoinOut._id = findWalletCoinOut._id;
+      try {
+        console.log(findWalletCoinOut);
+        await findWalletCoinOut.save();
+
+        findWalletCoinIn.XRP = sumUserCoinIn;
+        findWalletCoinIn._id = findWalletCoinIn._id;
+        try {
+          await findWalletCoinIn.save();
+          res.send("send success");
+        } catch (error) {
+          res.status(400).send(error);
+          console.log("wallet CoinIn can't receive");
+        }
+      } catch (error) {
+        res.status(400).send(error);
+        console.log("wallet CoinOut can't send");
+      }
+    } else {
+      res.send("not enough token");
+    }
+  }
 
 
 })
