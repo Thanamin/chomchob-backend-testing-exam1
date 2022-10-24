@@ -33,7 +33,7 @@
             <option value="ETH">ETH</option>
             <option value="XRP">XRP</option>
         </select>
-        <input title="price" type="number" name="coinPrice">
+        <input title="price" type="number "step="any" name="coinPrice">
         <button type="submit">Summit</button>
     </form><br><br><br>
 
@@ -43,7 +43,7 @@
         <a>Coin Name</a>
         <input title="coinName" type="text" name="coinName"><br>
         <a>Price</a>
-        <input title="price" type="number" name="coinPrice"><br>
+        <input title="price" type="number" step="any" name="coinPrice"><br>
         <button type="submit">Add</button>
     </form><br><br><br>
 
@@ -54,20 +54,20 @@
         <input title="userName" type="text" name="user_name"><br>
         <a>Coin (amount)</a><br>
         <a>BTC</a>
-        <input title="amount" type="number" name="BTC"><br>
+        <input title="amount" type="number" step="any" name="BTC"><br>
         <a>ETH</a>
-        <input title="amount" type="number" name="ETH"><br>
+        <input title="amount" type="number" step="any" name="ETH"><br>
         <a>XRP</a>
-        <input title="amount" type="number" name="XRP"><br>
+        <input title="amount" type="number" step="any" name="XRP"><br>
         <a>LINK</a>
-        <input title="amount" type="number" name="LINK"><br>
+        <input title="amount" type="number" step="any" name="LINK"><br>
         <button type="submit">Add</button>
     </form><br><br><br>
 
 
 
 
-    <form method="POST"     type="submit" action="/transfer" class="fromSendCoin">
+    <form method="POST" type="submit" action="/transfer" class="fromSendCoin">
         <div>
             <a>โอนเงิน</a>
         </div>
@@ -88,7 +88,7 @@
 
         <div>
             <a>จำนวนเงิน</a>
-            <input title="amount" type="number" name="amount">
+            <input title="amount" type="number" step="any" name="amount">
             <button type="submit">Send</button>
         </div>
     </form><br><br>
