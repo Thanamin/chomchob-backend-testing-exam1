@@ -21,8 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoUrl =
-  "ใส่ URL MongoDB Database ตรงนี้";
+mongoUrl = "ใส่ URL MongoDB Database ตรงนี้";
 app.use(async (req, res, next) => {
   try {
     await mongoose.connect(mongoUrl);
@@ -44,8 +43,6 @@ const ifNotLoggedIn = (req, res, next) => {
   next();
 };
 
-
-
 /////////////////////////////////////////////
 /// เช็ค role
 app.get("/", ifNotLoggedIn, (req, res, next) => {
@@ -57,8 +54,6 @@ app.get("/", ifNotLoggedIn, (req, res, next) => {
   }
 });
 /////////////////////////////////////////////
-
-
 
 /////////////////////////////////////////////
 /// user ใส่ login ไปเช็คกับ sever
@@ -80,7 +75,6 @@ app.post("/login", async (req, res) => {
 });
 /////////////////////////////////////////////
 
-
 /////////////////////////////////////////////
 // ดึงราคาปัจจุบัน
 app.get("/coinPrice", async (req, res) => {
@@ -89,8 +83,6 @@ app.get("/coinPrice", async (req, res) => {
   console.log(coinsPrice);
 });
 /////////////////////////////////////////////
-
-
 
 /////////////////////////////////////////////
 // แก้ไขราคา coin
@@ -118,7 +110,6 @@ app.post("/editprice", async (req, res, next) => {
 });
 /////////////////////////////////////////////
 
-
 /////////////////////////////////////////////
 //เพิ่มเหรียญใหม่พร้อมราคาเข้าระบบ
 app.post("/addNewCoin", async (req, res, next) => {
@@ -145,8 +136,6 @@ app.post("/addNewCoin", async (req, res, next) => {
 });
 /////////////////////////////////////////////
 
-
-
 /////////////////////////////////////////////
 //เพิ่มจำนวนเหรียญใน wallet ให้user
 app.post("/addCoinWallet", async (req, res, next) => {
@@ -157,22 +146,16 @@ app.post("/addCoinWallet", async (req, res, next) => {
     XRP: req.body.XRP,
     LINK: req.body.LINK,
   });
-  // console.log(newCoinInWalletData);
 
   let findNewInWalletCoin = await WalletsModel.findOne({
     user_name: req.body.user_name,
   });
 
-  // console.log(findNewInWalletCoin);
-
   // ถ้า user ไม่มี wallet ในระบบให้ create
   if (!findNewInWalletCoin) {
     try {
-      // newCoinInWalletData._id = findNewInWalletCoin._id
-      // console.log(newCoinInWalletData);
       await newCoinInWalletData.save();
       res.send("add coin in wallet success");
-      // console.log(newCoinInWalletData);
     } catch (error) {
       res.status(400).send(error);
       console.log("555");
@@ -197,22 +180,24 @@ app.post("/addCoinWallet", async (req, res, next) => {
 });
 /////////////////////////////////////////////
 
-
-
 /////////////////////////////////////////////
 //ดึงจำนวนเหรียญที่มีอยู่ในระบบทั้งหมดมาแสดง
-app.post('/summaryToken',async (req,res)=>{
-console.log(req.body)
-let checkCoin = "$" + req.body.selectCoin
-let sumCoin = await WalletsModel.aggregate([{ $group: { _id: req.body.selectCoin ,total: { $sum: checkCoin }}}])
+app.post("/summaryToken", async (req, res) => {
+  // console.log(req.body)
+  let checkCoin = "$" + req.body.selectCoin;
+  try {
+    let sumCoin = await WalletsModel.aggregate([
+      { $group: { _id: req.body.selectCoin, total: { $sum: checkCoin } } },
+    ]);
 
-console.log(sumCoin[0])
-res.send(sumCoin[0])
-})
+    // console.log(sumCoin[0])
+    res.send(sumCoin[0]);
+  } catch (error) {
+    res.status(400).send(error);
+    console.log("error");
+  }
+});
 /////////////////////////////////////////////
-
-
-
 
 /////////////////////////////////////////////
 // โอนเงินจาก Wallet1 -> Wallet2
@@ -226,7 +211,6 @@ res.send(sumCoin[0])
 // }
 
 app.post("/transfer", async (req, res) => {
-
   let findWalletCoinOut = await WalletsModel.findOne({
     user_name: req.body.userOut,
   });
@@ -237,61 +221,63 @@ app.post("/transfer", async (req, res) => {
   let coinCheckUserCoinOut = req.body.selectCoinOut;
   let sendAmountCoinUserCoinOut = req.body.amount;
 
-
   //Tranfer BTC
   if (coinCheckUserCoinOut === "BTC") {
     if (sendAmountCoinUserCoinOut < findWalletCoinOut.BTC) {
-      let sumUserCoinOut = findWalletCoinOut.BTC - (+sendAmountCoinUserCoinOut);
-      let sumUserCoinIn = findWalletCoinIn.BTC + (+sendAmountCoinUserCoinOut);
-      console.log(`sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}` )
+      let sumUserCoinOut = findWalletCoinOut.BTC - +sendAmountCoinUserCoinOut;
+      let sumUserCoinIn = findWalletCoinIn.BTC + +sendAmountCoinUserCoinOut;
+      console.log(
+        `sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}`
+      );
 
       findWalletCoinOut.BTC = sumUserCoinOut;
       findWalletCoinOut._id = findWalletCoinOut._id;
       try {
-        console.log(findWalletCoinOut)
+        console.log(findWalletCoinOut);
         await findWalletCoinOut.save();
 
         findWalletCoinIn.BTC = sumUserCoinIn;
-        findWalletCoinIn._id = findWalletCoinIn._id
+        findWalletCoinIn._id = findWalletCoinIn._id;
         try {
-          await findWalletCoinIn.save()
-          res.send("send success")
-        } catch(error){
+          await findWalletCoinIn.save();
+          res.send("send success");
+        } catch (error) {
           res.status(400).send(error);
           console.log("wallet CoinIn can't receive");
         }
-      } catch (error){
+      } catch (error) {
         res.status(400).send(error);
         console.log("wallet CoinOut can't send");
       }
     } else {
       res.send("not enough token");
     }
-  
-  
-  // Tranfer ETH
+
+    // Tranfer ETH
   } else if (coinCheckUserCoinOut === "ETH") {
     if (sendAmountCoinUserCoinOut < findWalletCoinOut.ETH) {
-      let sumUserCoinOut = findWalletCoinOut.ETH - (+sendAmountCoinUserCoinOut);
-      let sumUserCoinIn = findWalletCoinIn.ETH + (+sendAmountCoinUserCoinOut);
-      console.log(`sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}` )
+      let sumUserCoinOut = findWalletCoinOut.ETH - +sendAmountCoinUserCoinOut;
+      let sumUserCoinIn = findWalletCoinIn.ETH + +sendAmountCoinUserCoinOut;
+      console.log(
+        `sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}`
+      );
 
       findWalletCoinOut.ETH = sumUserCoinOut;
       findWalletCoinOut._id = findWalletCoinOut._id;
       try {
-        console.log(findWalletCoinOut)
+        console.log(findWalletCoinOut);
         await findWalletCoinOut.save();
 
         findWalletCoinIn.ETH = sumUserCoinIn;
-        findWalletCoinIn._id = findWalletCoinIn._id
+        findWalletCoinIn._id = findWalletCoinIn._id;
         try {
-          await findWalletCoinIn.save()
-          res.send("send success")
-        } catch(error){
+          await findWalletCoinIn.save();
+          res.send("send success");
+        } catch (error) {
           res.status(400).send(error);
           console.log("wallet CoinIn can't receive");
         }
-      } catch (error){
+      } catch (error) {
         res.status(400).send(error);
         console.log("wallet CoinOut can't send");
       }
@@ -299,30 +285,31 @@ app.post("/transfer", async (req, res) => {
       res.send("not enough token");
     }
 
-
-  // Tranfer XRP
+    // Tranfer XRP
   } else if (coinCheckUserCoinOut === "XRP") {
     if (sendAmountCoinUserCoinOut < findWalletCoinOut.XRP) {
-      let sumUserCoinOut = findWalletCoinOut.XRP - (+sendAmountCoinUserCoinOut);
-      let sumUserCoinIn = findWalletCoinIn.XRP + (+sendAmountCoinUserCoinOut);
-      console.log(`sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}` )
+      let sumUserCoinOut = findWalletCoinOut.XRP - +sendAmountCoinUserCoinOut;
+      let sumUserCoinIn = findWalletCoinIn.XRP + +sendAmountCoinUserCoinOut;
+      console.log(
+        `sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}`
+      );
 
       findWalletCoinOut.XRP = sumUserCoinOut;
       findWalletCoinOut._id = findWalletCoinOut._id;
       try {
-        console.log(findWalletCoinOut)
+        console.log(findWalletCoinOut);
         await findWalletCoinOut.save();
 
         findWalletCoinIn.XRP = sumUserCoinIn;
-        findWalletCoinIn._id = findWalletCoinIn._id
+        findWalletCoinIn._id = findWalletCoinIn._id;
         try {
-          await findWalletCoinIn.save()
-          res.send("send success")
-        } catch(error){
+          await findWalletCoinIn.save();
+          res.send("send success");
+        } catch (error) {
           res.status(400).send(error);
           console.log("wallet CoinIn can't receive");
         }
-      } catch (error){
+      } catch (error) {
         res.status(400).send(error);
         console.log("wallet CoinOut can't send");
       }
