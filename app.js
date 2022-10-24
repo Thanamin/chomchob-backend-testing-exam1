@@ -80,7 +80,7 @@ app.post("/login", async (req, res) => {
 app.get("/coinPrice", async (req, res) => {
   const coinsPrice = await coinAndPriceModel.find({}, { _id: 0 });
   res.send(coinsPrice);
-  console.log(coinsPrice);
+  // console.log(coinsPrice);
 });
 /////////////////////////////////////////////
 
@@ -101,7 +101,7 @@ app.post("/editprice", async (req, res, next) => {
     await coinAndPriceModel
       .findOneAndUpdate({ coinName: req.body.coinName }, data)
       .exec();
-    console.log(data);
+    // console.log(data);
     res.send("edit success");
   } catch (error) {
     res.status(400).send(error);
@@ -125,7 +125,7 @@ app.post("/addNewCoin", async (req, res, next) => {
     try {
       await newCoinData.save();
       res.send("add coin success");
-      console.log(newCoinData);
+      // console.log(newCoinData);
     } catch (error) {
       res.status(400).send(error);
       console.log("error");
@@ -158,7 +158,6 @@ app.post("/addCoinWallet", async (req, res, next) => {
       res.send("add coin in wallet success");
     } catch (error) {
       res.status(400).send(error);
-      console.log("555");
       console.log("error");
     }
 
@@ -166,7 +165,7 @@ app.post("/addCoinWallet", async (req, res, next) => {
   } else if (findNewInWalletCoin) {
     newCoinInWalletData._id = findNewInWalletCoin._id;
     try {
-      console.log(newCoinInWalletData);
+      // console.log(newCoinInWalletData);
       await WalletsModel.findOneAndUpdate(
         { user_name: req.body.user_name },
         newCoinInWalletData
@@ -183,7 +182,6 @@ app.post("/addCoinWallet", async (req, res, next) => {
 /////////////////////////////////////////////
 //ดึงจำนวนเหรียญที่มีอยู่ในระบบทั้งหมดมาแสดง
 app.post("/summaryToken", async (req, res) => {
-  // console.log(req.body)
   let checkCoin = "$" + req.body.selectCoin;
   try {
     let sumCoin = await WalletsModel.aggregate([
@@ -226,14 +224,11 @@ app.post("/transfer", async (req, res) => {
     if (sendAmountCoinUserCoinOut < findWalletCoinOut.BTC) {
       let sumUserCoinOut = findWalletCoinOut.BTC - +sendAmountCoinUserCoinOut;
       let sumUserCoinIn = findWalletCoinIn.BTC + +sendAmountCoinUserCoinOut;
-      console.log(
-        `sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}`
-      );
 
       findWalletCoinOut.BTC = sumUserCoinOut;
       findWalletCoinOut._id = findWalletCoinOut._id;
       try {
-        console.log(findWalletCoinOut);
+        // console.log(findWalletCoinOut);
         await findWalletCoinOut.save();
 
         findWalletCoinIn.BTC = sumUserCoinIn;
@@ -258,14 +253,11 @@ app.post("/transfer", async (req, res) => {
     if (sendAmountCoinUserCoinOut < findWalletCoinOut.ETH) {
       let sumUserCoinOut = findWalletCoinOut.ETH - +sendAmountCoinUserCoinOut;
       let sumUserCoinIn = findWalletCoinIn.ETH + +sendAmountCoinUserCoinOut;
-      console.log(
-        `sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}`
-      );
 
       findWalletCoinOut.ETH = sumUserCoinOut;
       findWalletCoinOut._id = findWalletCoinOut._id;
       try {
-        console.log(findWalletCoinOut);
+        // console.log(findWalletCoinOut);
         await findWalletCoinOut.save();
 
         findWalletCoinIn.ETH = sumUserCoinIn;
@@ -290,9 +282,6 @@ app.post("/transfer", async (req, res) => {
     if (sendAmountCoinUserCoinOut < findWalletCoinOut.XRP) {
       let sumUserCoinOut = findWalletCoinOut.XRP - +sendAmountCoinUserCoinOut;
       let sumUserCoinIn = findWalletCoinIn.XRP + +sendAmountCoinUserCoinOut;
-      console.log(
-        `sumUserCoinOut = ${sumUserCoinOut} sumUserCoinIn = ${sumUserCoinIn}`
-      );
 
       findWalletCoinOut.XRP = sumUserCoinOut;
       findWalletCoinOut._id = findWalletCoinOut._id;
