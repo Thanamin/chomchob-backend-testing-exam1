@@ -22,6 +22,10 @@ let userSchema = new mongoose.Schema({
         max: 30, 
         require: true 
     },
+    // coins: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: "coin"
+    // }]
 
 })
 

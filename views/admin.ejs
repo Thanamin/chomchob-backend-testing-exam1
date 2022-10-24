@@ -10,7 +10,22 @@
 <body>
     <a>สวัสดี Admin</a><br><br><br>
 
-    <div>
+
+    <a>ราคาเหรียญปัจุบัน</a>
+    <form method="POST" type="submit" action="/summaryToken">
+        
+        <select title="coin" value="selectedType" name="selectCoin">
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="XRP">XRP</option>
+        </select>
+
+        <button type="submit">Check</button>
+
+
+    </form>
+    <br><br>
+    <!-- <div>
         <a>ราคาเหรียญปัจุบัน</a>
         <table>
             <tr>
@@ -18,6 +33,7 @@
                 <th>USD ($)</th>
             </tr>
             <table>
+                
                 <td>BTC</td>
                 <td>120000</td>
                 <tr>
@@ -54,7 +70,7 @@
                     <td>1000</td>
                 </tr>
             </table>
-    </div><br><br>
+    </div><br><br> -->
 
     <a>แก้ไขราคาเหรียญปัจจุบัน (USD $) </a><br>
     <form method="POST" type="submit" action="/editprice" class="updatePriceCoin">
@@ -68,18 +84,38 @@
     </form><br><br><br>
 
     <form method="POST" type="submit" action="/addNewCoin" class="addNewCoin">
-        <a>เพิ่มสกุลเงินเข้าไปในระบบ</a><br>
-        <a>User Name</a>
-        <input title="user_name" type="text"><br>
+        <a>เพิ่มสกุลเงินและราคาเข้าไปในระบบ</a><br>
+        <!-- <a>User Name</a>
+        <input title="user_name" type="text"><br> -->
         <a>Coin Name</a>
-        <input title="coinName" type="text"><br>
-        <a>amount</a>
-        <input title="amount" type="number"><br>
+        <input title="coinName" type="text" name="coinName"><br>
+        <a>Price</a>
+        <input title="price" type="number" name="coinPrice"><br>
+        <button type="submit">Add</button>
+    </form><br><br><br>
+
+    <form method="POST" type="submit" action="/addCoinWallet" class="addNewCoin">
+        <a>เพิ่มจำนวนเงินให้ wallet และแก้ไขจำนวนเงินให้ wallet</a><br>
+        <!-- <a>User Name</a>
+        <input title="user_name" type="text"><br> -->
+        <a>User Name</a>
+        <input title="userName" type="text" name="user_name"><br>
+        <a>Coin (amount)</a><br>
+        <a>BTC</a>
+        <input title="amount" type="number" name="BTC"><br>
+        <a>ETH</a>
+        <input title="amount" type="number" name="ETH"><br>
+        <a>XRP</a>
+        <input title="amount" type="number" name="XRP"><br>
+        <a>LINK</a>
+        <input title="amount" type="number" name="LINK"><br>
         <button type="submit">Add</button>
     </form><br><br><br>
 
 
-    <form type="submit" class="fromSendCoin">
+
+
+    <form method="POST"     type="submit" action="/transfer" class="fromSendCoin">
         <div>
             <a>โอนเงิน</a>
         </div>
@@ -91,31 +127,31 @@
         </div>
         <div>
             <a>สกุลเงินที่ต้องการส่งออก</a>
-            <select title="coin" value="selectedType" onChange="e => setType(e.target.value)">
+            <select title="coin" value="selectedType" name="selectCoinOut">
                 <option value="BTC">BTC</option>
                 <option value="ETH">ETH</option>
                 <option value="XRP">XRP</option>
             </select>
         </div>
 
-        <div>
+        <!-- <div>
             <a>สกุลเงินที่ต้องการให้ผู้รับได้รับ</a>
-            <select title="coin" value="selectedType" onChange="e => setType(e.target.value)">
+            <select title="coin" value="selectedType" name="selectCoinIn">
                 <option value="BTC">BTC</option>
                 <option value="ETH">ETH</option>
                 <option value="XRP">XRP</option>
             </select>
-        </div>
+        </div> -->
 
-        <div>
+        <!-- <div>
             <a>อัตราแลกเปลี่ยน</a>
             <a>1:15</a>
-        </div>
+        </div> -->
 
         <div>
             <a>จำนวนเงิน</a>
-            <input title="amount" type="number">
-            <button name="sendCoin" type="submit">Send</button>
+            <input title="amount" type="number" name="amount">
+            <button type="submit">Send</button>
         </div>
     </form><br><br>
 
@@ -123,7 +159,7 @@
 
 
 
-    <form type="submit" class="checkAmountCoinUser">
+    <!-- <form type="submit" class="checkAmountCoinUser">
         <a>แก้ไขจำนวนเงิน user</a>
         <select title="userName" value="selectedType" onChange="e => setType(e.target.value)">
             <option value="userA">UserA</option>
@@ -150,8 +186,8 @@
                 <td>XRP</td>
                 <td>1000</td>
             </tr>
-        </table>
-
+        </table> -->
+<!-- 
         <form type="submit" class="editAmountCoinUser">
             <a>สกุลเงินที่ต้องการแก้ไข</a>
             <select title="coin" value="selectedType" onChange="e => setType(e.target.value)">
@@ -162,7 +198,7 @@
             <a>ยอดคงเหลือ</a>
             <input title="amount" type="number">
             <button name="updateAmount" type="submit">Update</button>
-        </form>
+        </form> -->
 
 </body>
 

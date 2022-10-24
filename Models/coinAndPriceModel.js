@@ -23,9 +23,9 @@ let coinAndPriceSchema = new mongoose.Schema({
     //     require: true 
     // }, 
 
-    _id: {
-        require: false
-    }
+    // _id: {
+    //     require: false
+    // }
 
 
 })
