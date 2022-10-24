@@ -58,13 +58,53 @@
         </tr>
     </table>
     
+    <form method="POST"     type="submit" action="/transfer" class="fromSendCoin">
+        <div>
+            <a>โอนเงิน</a>
+        </div>
+        <div>
+            <a>จาก User ชื่อ (ผู้โอนเงิน)</a>
+            <input title="user" type="text" name="userOut">
+            <a>ให้ User ชื่อ (ผู้รับเงิน)</a>
+            <input title="user" type="text" name="userIn">
+        </div>
+        <div>
+            <a>สกุลเงินที่ต้องการส่งออก</a>
+            <select title="coin" value="selectedType" name="selectCoinOut">
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
+                <option value="XRP">XRP</option>
+            </select>
+        </div>
 
-    <form type="submit" class="fromSendCoin"><div>
+        <!-- <div>
+            <a>สกุลเงินที่ต้องการให้ผู้รับได้รับ</a>
+            <select title="coin" value="selectedType" name="selectCoinIn">
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
+                <option value="XRP">XRP</option>
+            </select>
+        </div> -->
+
+        <!-- <div>
+            <a>อัตราแลกเปลี่ยน</a>
+            <a>1:15</a>
+        </div> -->
+
+        <div>
+            <a>จำนวนเงิน</a>
+            <input title="amount" type="number" name="amount">
+            <button type="submit">Send</button>
+        </div>
+    </form><br><br>
+
+
+    <!-- <form type="submit" class="fromSendCoin"><div>
         <h3>โอนเงิน</h3>
     </div>
         <div>
         <a>สกุลเงินที่ต้องการส่งออก</a>
-        <select title="coin" value="selectedType" onChange="e => setType(e.target.value)">
+        <select title="coin" value="selectedType" >
             <option value="BTC">BTC</option>
             <option value="ETH">ETH</option>
             <option value="XRP">XRP</option>
@@ -73,7 +113,7 @@
 
         <div>
         <a>สกุลเงินที่ต้องการให้ผู้รับได้รับ</a>
-        <select title="coin" value="selectedType" onChange="e => setType(e.target.value)">
+        <select title="coin" value="selectedType" >
             <option value="BTC">BTC</option>
             <option value="ETH">ETH</option>
             <option value="XRP">XRP</option>
@@ -97,7 +137,12 @@
         <button name="sendCoin" type="submit" >Send</button>
         </div>
 
-    </form>
+    </form> -->
+
+    <form method="POST" type="submit" action="/logout">
+        <button name="logout" type="submit">Logout</button>
+        </form>
+        
 </body>
 
 </html>
