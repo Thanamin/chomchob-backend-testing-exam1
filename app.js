@@ -21,7 +21,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoUrl = "ใส่ URL MongoDB Database ตรงนี้";
+mongoUrl =
+  "ใส่ URL MongoDB Database ตรงนี้";
 app.use(async (req, res, next) => {
   try {
     await mongoose.connect(mongoUrl);
@@ -213,10 +214,8 @@ res.send(sumCoin[0])
 
 
 
-
-
 /////////////////////////////////////////////
-// transfer amount จาก Wallet1 -> Wallet2
+// โอนเงินจาก Wallet1 -> Wallet2
 
 // {
 //   userOut: 'userA',
