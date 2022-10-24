@@ -421,6 +421,8 @@ app.post('/logout',(req,res,next)=>{
   console.log(token)
   res.redirect('/')
 })
+/////////////////////////////////////////////
+
 
 const PORT = 8080;
 app.listen(PORT, () => {
